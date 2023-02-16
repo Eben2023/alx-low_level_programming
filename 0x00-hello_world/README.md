@@ -1,1 +1,1 @@
-This readme file is located in the project folder
+This readme file can be found in the project folder
