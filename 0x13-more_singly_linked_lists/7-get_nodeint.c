@@ -16,5 +16,5 @@ listint_t *current = head;
 for (i = 0; current && i < index; i++)
 current = current->next;
 
-return (i == index) ? current : NULL;
+return ((i == index) ? current : NULL);
 }
