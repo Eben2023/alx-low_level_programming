@@ -1,3 +1,6 @@
+#include <stdlib>
+#incldue "list"
+
 /**
  * add_nodeint - adds a new node at the beginning of a listint_t list.
  * @head: pointer to a pointer to the first element of the list
