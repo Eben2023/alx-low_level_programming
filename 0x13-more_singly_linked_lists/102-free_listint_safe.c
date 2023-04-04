@@ -1,4 +1,4 @@
-#include <stdlib.h>
+#include <stdio.h>
 #include "lists.h"
 
 /**
@@ -6,7 +6,7 @@
  *
  * @h: A pointer to the head of the listint_t list.
  *
- * Return: The size of the list that was free'd.
+ * Return: The size of the list that was freed.
  */
 size_t free_listint_safe(listint_t **h)
 {
