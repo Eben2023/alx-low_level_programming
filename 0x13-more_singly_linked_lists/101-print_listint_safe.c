@@ -1,30 +1,111 @@
 #include "lists.h"
 #include <stdio.h>
-#include <stdlib.h>
+
+size_t looped_listint_len(const listint_t *head);
+size_t print_listint_safe(const listint_t *head);
 
 /**
- * print_listint_safe - Prints a listint_t list safely
- * @head: A pointer to the head of the list
+ * main - Entry point, runs some tests on print_listint_safe.
  *
- * Return: The number of nodes in the list
+ * Return: Always 0.
  */
-size_t print_listint_safe(const listint_t *head)
+int main(void)
 {
-size_t count = 0;
-const listint_t *temp = head;
+listint_t *head;
+listint_t *node;
 
-while (temp != NULL)
+head = NULL;
+node = add_nodeint(&head, 0);
+add_nodeint(&head, 1);
+add_nodeint(&head, 2);
+add_nodeint(&head, 3);
+add_nodeint(&head, 4);
+add_nodeint(&head, 5);
+add_nodeint(&head, 6);
+add_nodeint(&head, 7);
+add_nodeint(&head, 8);
+add_nodeint(&head, 9);
+node->next = add_nodeint(&head, 10);
+
+printf("Nodes in the list = %lu\n", print_listint_safe(head));
+free_listint_safe(&head);
+
+head = NULL;
+node = add_nodeint(&head, 0);
+add_nodeint(&head, 1);
+add_nodeint(&head, 2);
+add_nodeint(&head, 3);
+add_nodeint(&head, 4);
+add_nodeint(&head, 5);
+add_nodeint(&head, 6);
+add_nodeint(&head, 7);
+add_nodeint(&head, 8);
+add_nodeint(&head, 9);
+add_nodeint(&head, 10);
+
+printf("Nodes in the list = %lu\n", print_listint_safe(head));
+free_listint_safe(&head);
+
+head = NULL;
+node = add_nodeint(&head, 0);
+
+printf("Nodes in the list = %lu\n", print_listint_safe(head));
+free_listint_safe(&head);
+
+head = add_nodeint(&head, 0);
+node = add_nodeint(&head, 1);
+node->next = head;
+
+printf("Nodes in the list = %lu\n", print_listint_safe(head));
+free_listint_safe(&head);
+
+return (0);
+}
+
+/**
+ * looped_listint_len - Counts the number of unique nodes
+ *  in a looped listint_t linked list.
+ * @head: A pointer to the head of the listint_t to check.
+ *
+ * Return: If the list is not looped - 0.
+ * Otherwise - the number of unique nodes in the list.
+ */
+size_t looped_listint_len(const listint_t *head)
 {
-printf("[%p] %d\n", (void *)temp, temp->n);
-count++;
-if (temp <= temp->next)
+const listint_t *tortoise, *hare;
+size_t nodes = 1;
+
+if (head == NULL || head->next == NULL)
+return (0);
+
+tortoise = head->next;
+hare = (head->next)->next;
+
+while (hare)
 {
-fprintf(stderr, "Error: loop detected in list\n");
-exit(98);
-}
-temp = temp->next;
+if (tortoise == hare)
+{
+tortoise = head;
+while (tortoise != hare)
+{
+nodes++;
+tortoise = tortoise->next;
+hare = hare->next;
 }
 
-return (count);
+tortoise = tortoise->next;
+while (tortoise != hare)
+{
+nodes++;
+tortoise = tortoise->next;
 }
 
+return (nodes);
+}
+
+tortoise = tortoise->next;
+hare = (hare->next)->next;
+}
+
+return (0);
+}
