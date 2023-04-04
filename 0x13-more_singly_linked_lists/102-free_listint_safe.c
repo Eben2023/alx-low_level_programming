@@ -11,25 +11,29 @@
 size_t free_listint_safe(listint_t **h)
 {
 size_t size = 0;
-listint_t *tmp, *current = *h;
+int diff;
+listint_t *temp, *current = *h;
 
 while (current)
 {
-size++;
-if (current <= current->next)
+diff = current - current->next;
+if (diff > 0)
 {
 printf("Freeing %d\n", current->n);
-tmp = current;
+temp = current;
 current = current->next;
-free(tmp);
+free(temp);
+size++;
 }
 else
 {
 printf("Freeing %d\n", current->n);
 free(current);
+size++;
 break;
 }
 }
+
 *h = NULL;
 return (size);
 }
