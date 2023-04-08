@@ -7,22 +7,22 @@
 
 void print_binary(unsigned long int n)
 {
-unsigned long int mask = 1ul << (sizeof(unsigned long int) * 8 - 1);
-int flag = 0;
-while (mask)
+unsigned long int val_n = 1ul << (sizeof(unsigned long int) * 8 - 1);
+int check = 0;
+while (val_n)
 {
-if (n & mask)
+if (n & val_n)
 {
 putchar('1');
-flag = 1;
+check = 1;
 }
-else if (flag)
+else if (check)
 {
 putchar('0');
 }
-mask >>= 1;
+val_n >>= 1;
 }
-if (!flag)
+if (!check)
 {
 putchar('0');
 }
