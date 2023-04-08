@@ -13,7 +13,7 @@ unsigned int bin_number = 0;
 unsigned int factor = 1;
 int len = 0;
 
-if (b == NULL)
+if (b == '\0' || b == NULL)
 return (0);
 
 while (b[len] != '\0')
