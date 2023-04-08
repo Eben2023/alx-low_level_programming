@@ -11,28 +11,31 @@
 
 unsigned int binary_to_uint(const char *b)
 {
-unsigned int num = 0;
+unsigned int decimal_num = 0;
+int conv_multiplier = 1;
+int length = 0;
 
-if (b == NULL)
+while (*(b + length) != '\0')
+{
+length++;
+}
+
+if (length == 0)
 {
 return (0);
 }
 
-for (int i = 0; b[i] != '\0'; i++)
+for (int i = length - 1; i >= 0; i--)
 {
-if (b[i] == '0')
-{
-num = num * 2;
-}
-else if (b[i] == '1')
-{
-num = num * 2 + 1;
-}
-else
+
+if (*(b + i) != '0' && *(b + i) != '1')
 {
 return (0);
 }
+
+decimal_num += (*(b + i) - '0') * conv_multiplier;
+conv_multiplier *= 2;
 }
 
-return (num);
+return (decimal_num);
 }
