@@ -8,38 +8,19 @@
 
 int get_endianness(void)
 {
-int num = 1;
-char *endian;
-int i;
-
-endian = (char *)malloc(sizeof(char));
-
-if (endian == NULL)
-{
-
-return (-1);
-}
-
-for (i = 0; i < sizeof(int); i++)
-{
-if (i == 0)
-{
-*endian = (char)num;
-}
-else
-{
-*endian = (char)(num >> (i * 8));
-}
-}
+int number = 1;
+char *endian = (char *)&number;
 
 if (*endian == 1)
 {
-free(endian);
 return (1);
+}
+else if (*endian == 0)
+{
+return (0);
 }
 else
 {
-free(endian);
-return (0);
+return (-1);
 }
 }
