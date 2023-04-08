@@ -10,20 +10,11 @@
 
 int clear_bit(unsigned long int *n, unsigned int index)
 {
-unsigned long int select_bit = 1;
-int x;
-
-if (index >= sizeof(unsigned long int) * 8)
+if (index >= (sizeof(unsigned long int) * 8))
 {
 return (-1);
 }
-
-for (x = 0; x < index; x++)
-{
-select_bit <<= 1;
-}
-
-*n &= ~select_bit;
-
+unsigned long int mask = ~(1ul << index);
+*n = (*n & mask);
 return (1);
 }
