@@ -7,16 +7,8 @@
 
 void print_binary(unsigned long int n)
 {
-unsigned long int select_bit = 1;
-int num_bits = 0;
-while ((n >> num_bits) > 0)
-num_bits++;
+if (n > 1)
+print_binary(n >> 1);
 
-for (int i = num_bits - 1; i >= 0; i--)
-{
-if (n & (select_bit << i))
-_putchar('1');
-else
-_putchar('0');
-}
+_putchar((n & 1) + '0');
 }
