@@ -1,4 +1,7 @@
 #include "main.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 /**
  * binary_to_uint - Converts a binary string to a
@@ -13,10 +16,9 @@ unsigned int binary_to_uint(const char *b)
 {
 unsigned int num = 0;
 
-if (b == '\0')
-{
+if (!b)
 return (0);
-}
+
 
 for (int i = 0; b[i] != '\0'; i++)
 {
