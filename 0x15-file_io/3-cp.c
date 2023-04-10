@@ -1,3 +1,5 @@
+#include "main.h"
+
 /**
  * main - copies the content of a file to another file
  *
@@ -6,6 +8,7 @@
  *
  * Return: 0 on success, otherwise exit codes 97-100
  */
+
 int main(int argc, char *argv[])
 {
 int fd_from, fd_to, rd, wr;
