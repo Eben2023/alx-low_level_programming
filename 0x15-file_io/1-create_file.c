@@ -22,13 +22,11 @@ file_descriptor = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0600);
 if (file_descriptor == -1)
 return (-1);
 
-if (!(text_content == NULL))
+if (text_content != NULL)
 {
 
-for (int a = 0; text_content[i] != '\0'; a++)
-{
+while (text_content[file_length] != '\0')
 file_length++;
-}
 
 byte_written = write(file_descriptor, text_content, file_length);
 if (byte_written == -1 || byte_written != file_length)
