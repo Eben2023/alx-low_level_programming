@@ -14,6 +14,11 @@ int file_length = 0;
 int file_descriptor;
 int write_check;
 
+if (filename == NULL)
+{
+return (-1);
+}
+
 if (text_content != NULL)
 {
 while (text_content[file_length])
@@ -22,10 +27,9 @@ file_length++;
 
 file_descriptor = open(filename, O_WRONLY | O_APPEND);
 if (file_descriptor == -1)
+{
 return (-1);
-
-if (filename == NULL)
-return (-1);
+}
 
 if (file_length >= 1)
 {
@@ -37,10 +41,8 @@ return (-1);
 }
 }
 
-else
-{
 close(file_descriptor);
 
 return (1);
-}
+
 }
