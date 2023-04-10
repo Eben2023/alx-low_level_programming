@@ -10,32 +10,35 @@
 
 int append_text_to_file(const char *filename, char *text_content)
 {
-int fd, res, len = 0;
+int file_length = 0;
+int file_descriptor;
+int write_check;
+
 
 if (filename == NULL)
 return (-1);
 
 if (text_content != NULL)
 {
-while (text_content[len])
-len++;
+while (text_content[file_length])
+file_length++;
 }
 
-fd = open(filename, O_WRONLY | O_APPEND);
-if (fd == -1)
+file_descriptor = open(filename, O_WRONLY | O_APPEND);
+if (file_descriptor == -1)
 return (-1);
 
-if (len > 0)
+if (file_length > 0)
 {
-res = write(fd, text_content, len);
-if (res != len)
+write_check = write(file_descriptor, text_content, file_length);
+if (write_check != file_length)
 {
-close(fd);
+close(file_descriptor);
 return (-1);
 }
 }
 
-close(fd);
+close(file_descriptor);
 
 return (1);
 }
