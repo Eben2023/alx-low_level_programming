@@ -1,52 +1,46 @@
-/**
- * get_string_length - Returns the length of a null-terminated string.
- * @str: The string to get the length of.
- *
- * Return: The length of the string.
- */
-int get_string_length(const char *str)
-{
-int len = 0;
-
-while (str && str[len])
-{
-len++;
-}
-
-return (len);
-}
+#include "main.h"
 
 /**
- * append_text_to_file - Appends text to a file.
- * @filename: The name of the file to append to.
- * @text_content: The text to append to the file.
+ * append_text_to_file - Appends text at the end of a file
+ * @filename: Name of file
+ * @text_content: String added at the end of the file
  *
- * Return: 1 on success, -1 on failure.
- */
-int append_text_to_file(const char *filename, const char *text_content)
-{
-int text_len, file_descriptor, write_check;
+ * Return: 1 on success and -1 on failure
+ **/
 
-if (!filename)
+int append_text_to_file(const char *filename, char *text_content)
 {
-return (-1);
-}
+int file_length = 0;
+int file_descriptor;
+int write_check;
 
-text_len = get_string_length(text_content);
-if (text_len == 0)
+if (text_content != NULL)
 {
-return (1);
+while (text_content[file_length])
+file_length++;
 }
 
 file_descriptor = open(filename, O_WRONLY | O_APPEND);
 if (file_descriptor == -1)
+return (-1);
+
+if (filename == NULL)
+return (-1);
+
+if (file_length >= 1)
 {
+write_check = write(file_descriptor, text_content, file_length);
+if (write_check != file_length)
+{
+close(file_descriptor);
 return (-1);
 }
-
-write_check = write(file_descriptor, text_content, text_len);
-close(file_descriptor);
-
-return (write_check == text_len ? 1 : -1);
 }
 
+else
+{
+close(file_descriptor);
+
+return (1);
+}
+}
