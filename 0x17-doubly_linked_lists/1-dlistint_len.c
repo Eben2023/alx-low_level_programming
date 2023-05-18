@@ -16,5 +16,5 @@ number++;
 h = h->next;
 }
 
-return number;
+return (number);
 }
