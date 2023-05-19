@@ -1,19 +1,25 @@
 #include "lists.h"
 
 /**
- * free_dlistint - Frees a doubly linked list.
+ * get_dnodeint_at_index - Returns the nth node of a doubly linked list.
  * @head: Pointer to the head of the doubly linked list.
+ * @index: Index of the node to retrieve, starting from 0.
  *
- * Return: void
+ * Return: Pointer to the nth node, or NULL if the node does not exist.
  */
-void free_dlistint(dlistint_t *head)
+dlistint_t *get_dnodeint_at_index(dlistint_t *head, unsigned int index)
 {
-dlistint_t *c_ptr;
+unsigned int num = 0;
+dlistint_t *c_ptr = head;
 
-while (head != NULL)
+while (c_ptr != NULL)
 {
-c_ptr = head;
-head = head->next;
-free(c_ptr);
+if (num == index)
+return (c_ptr);
+
+c_ptr = c_ptr->next;
+num++;
 }
+
+return (NULL);
 }
