@@ -1,23 +1,13 @@
 #!/bin/bash
 
-# Collect all .c files in the current directory
-C_FILES=$(ls *.c 2>/dev/null)
+# Collect all the .c files in the current directory
+c_files=$(find . -maxdepth 1 -type f -name '*.c')
 
-# Check if any .c files exist
-if [ -z "$C_FILES" ]; then
-  echo "Failure!!! No .c files in current directory."
-  exit 1
-fi
+# Compile the .c files into object files
+gcc -c -Wall -Werror -fpic ${c_files}
 
-# Compile each .c file into individual object files
-for file in $C_FILES; do
-  gcc -c -fPIC "$file" -o "${file%.c}.o"
-done
-
-# Create the dynamic library from the object files
+# Create the dynamic library
 gcc -shared -o liball.so *.o
 
 # Clean up object files
-rm *.o
-
-echo "Success!!! Dynamic library was creaated!"
+rm -f *.o
