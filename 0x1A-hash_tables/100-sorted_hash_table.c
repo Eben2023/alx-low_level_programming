@@ -116,7 +116,7 @@ temp->sprev = node;
  */
 int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 {
-shash_node_t *node, *temp;
+shash_node_t *node;
 unsigned long int index;
 
 if (ht == NULL || key == NULL || *key == '\0')
